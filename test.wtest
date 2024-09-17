@@ -1,0 +1,25 @@
+import casa.*
+import cosas.*
+describe "compras de la casa" {
+  test "compras" {
+    casaDePepeYJulian.comprar(heladera)
+    casaDePepeYJulian.comprar(cama)
+    casaDePepeYJulian.comprar(plancha)
+    assert.equals([heladera, cama, plancha], casaDePepeYJulian.cosas())
+    assert.equals(3, casaDePepeYJulian.cantidadDeCosasCompradas())
+    assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
+    assert.that(casaDePepeYJulian.tieneAlgun(mueble))
+    assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
+    assert.that(casaDePepeYJulian.vieneDeComprar(electrodomestico))
+    assert.notThat(casaDePepeYJulian.vieneDeComprar(mueble))
+    assert.that(casaDePepeYJulian.esDerrochona())
+    assert.equals([heladera, plancha], casaDePepeYJulian.comprados(electrodomestico))
+    assert.equals([cama], casaDePepeYJulian.comprados(mueble))
+    assert.that(casaDePepeYJulian.comprados(comida).isEmpty())
+    assert.notThat(casaDePepeYJulian.malaEpoca())
+    assert.equals([tiraDeAsado, paqueteDeFideos], casaDePepeYJulian.queFaltaComprar([tiraDeAsado, plancha, paqueteDeFideos]))
+    assert.that(casaDePepeYJulian.faltaComida())
+    assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
+    assert.that(casaDePepeYJulian.tieneAlgun(mueble))
+  }
+}
