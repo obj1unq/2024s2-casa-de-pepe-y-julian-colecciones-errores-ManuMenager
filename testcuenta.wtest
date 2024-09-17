@@ -1,0 +1,30 @@
+import casa.*
+import cosas.*
+import cuentas.*
+describe "test excepciones" {
+  test "test ok" {
+    cuentaCorriente.saldo(1000)
+    cuentaCorriente.extraer(900)
+    assert.equals(100, cuentaCorriente.saldo())
+  }
+
+  test "test no negativo" {
+    cuentaCorriente.saldo(1000)
+    assert.throwsException({cuentaCorriente.extraer(1200)})
+    assert.equals(1000, cuentaCorriente.saldo())
+  }
+
+  test "test casa compra ok" {
+    cuentaCorriente.saldo(1000)
+    casaDePepeYJulian.comprar(tiraDeAsado)
+    assert.equals(1, casaDePepeYJulian.cantidadDeCosasCompradas())
+    assert.equals(650, cuentaCorriente.saldo())
+  }
+
+  test "test casa no puede comprar" {
+    cuentaCorriente.saldo(1000)
+    assert.throwsException({casaDePepeYJulian.comprar(plancha)})
+    assert.equals(0, casaDePepeYJulian.cantidadDeCosasCompradas())
+    assert.equals(1000, cuentaCorriente.saldo())
+  }
+}
